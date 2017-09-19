@@ -10,10 +10,6 @@
     <artifactId>ssm_crud</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <build>
-
-    </build>
-
     <dependencies>
 
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -58,6 +54,14 @@
             <version>4.3.9.RELEASE</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.3.7.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/c3p0/c3p0 -->
         <dependency>
             <groupId>c3p0</groupId>
@@ -89,5 +93,4 @@
         </dependency>
 
     </dependencies>
-
 </project>
