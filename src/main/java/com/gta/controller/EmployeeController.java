@@ -8,9 +8,7 @@ import com.gta.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,6 +45,42 @@ public class EmployeeController {
         model.addAttribute("pageInfo", pageInfo);
 
         return "list";
+    }
+
+    @ResponseBody
+    //  "/emp" - POST -> 保存员工
+    //  "/emp/{id}" - GET -> 获取单个员工
+    //  "/emp" - DELETE -> 删除员工
+    //  "/emp" - PUT -> 修改员工
+    @RequestMapping(value = "/emp", method = RequestMethod.POST)
+    public Message saveEmp(Employee employee){
+        employeeService.saveEmp(employee);
+        return Message.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/emp/{id}", method = RequestMethod.GET)
+    public Message getEmp(@PathVariable("id") Integer id){
+        Employee employee = employeeService.getEmp(id);
+        return Message.success().builder("emp", employee);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/emp", method = RequestMethod.PUT)
+    public Message updateEmp(Employee employee){
+        employeeService.updateEmployee(employee);
+        return Message.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/checkEmp", method = RequestMethod.POST)
+    public Message checkEmp(String empName){
+        long count = employeeService.checkEmp(empName);
+        if (count == 0){
+            return Message.success();
+        }else {
+            return Message.fail();
+        }
     }
 
 }

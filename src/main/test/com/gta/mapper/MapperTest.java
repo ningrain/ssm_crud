@@ -1,5 +1,6 @@
 package com.gta.mapper;
 
+import com.gta.BaseTest;
 import com.gta.bean.Department;
 import com.gta.bean.Employee;
 import com.gta.dao.DepartmentMapper;
@@ -21,9 +22,7 @@ import java.util.UUID;
  * Date: 2017/9/19
  * Time: 9:17
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:applicationContext.xml"})
-public class MapperTest {
+public class MapperTest extends BaseTest{
 
     @Autowired
     private DepartmentMapper departmentMapper;

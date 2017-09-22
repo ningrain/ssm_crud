@@ -10,4 +10,12 @@ import java.util.List;
  */
 public interface EmployeeService {
     List<Employee> getAllEmpls();
+
+    int saveEmp(Employee employee);
+
+    long checkEmp(String name);
+
+    Employee getEmp(Integer id);
+
+    int updateEmployee(Employee employee);
 }
