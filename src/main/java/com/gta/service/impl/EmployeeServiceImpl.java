@@ -46,4 +46,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeMapper.updateByPrimaryKeySelective(employee);
     }
 
+    public int delEmpByBatch(List<Integer> ids) {
+        EmployeeExample employeeExample = new EmployeeExample();
+        EmployeeExample.Criteria criteria = employeeExample.createCriteria();
+        criteria.andEmpIdIn(ids);
+        return employeeMapper.deleteByExample(employeeExample);
+    }
+
 }

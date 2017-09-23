@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -69,6 +70,18 @@ public class EmployeeController {
     @RequestMapping(value = "/emp", method = RequestMethod.PUT)
     public Message updateEmp(Employee employee){
         employeeService.updateEmployee(employee);
+        return Message.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/emp/{ids}", method = RequestMethod.DELETE)
+    public Message delEmp(@PathVariable("ids") String ids){
+        List<Integer> idList = new ArrayList<>();
+        String[] strs = ids.split(",");
+        for (String str : strs) {
+            idList.add(Integer.valueOf(str));
+        }
+        employeeService.delEmpByBatch(idList);
         return Message.success();
     }
 

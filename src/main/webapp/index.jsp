@@ -25,7 +25,10 @@
             <table id="table" class="table table-hover table-bordered">
                 <thead>
                 <tr>
-                    <th></th>
+                    <th>
+                        <input type="checkbox" class="check-box" id="checkAllBox"/>
+                    </th>
+                    <th>序号</th>
                     <th>姓名</th>
                     <th>性别</th>
                     <th>电子邮件</th>
@@ -208,6 +211,34 @@
                 }
             })
         });
+
+        $("#checkAllBox").click(function () {
+            $("#table").find(".check-item").prop("checked", $("#checkAllBox").prop("checked"));
+        });
+
+        $(document).on("click", ".check-item", function () {
+            var flag = $(".check-item:checked").length === $(".check-item").length;
+            $("#checkAllBox").prop("checked", flag);
+        });
+
+        $("#del_btn").click(function () {
+            var names = '';
+            var ids = '';
+            if ($(".check-item:checked").length === 0){
+                alert("请先选择员工！");
+                return false;
+            }else{
+                $.each($(".check-item"), function () {
+                    if ($(this).prop("checked")){
+                        ids = ids + $(this).parent().next().text() + ",";
+                        names = names + $(this).parent().next().next().text() + ",";
+                    }
+                });
+            }
+            ids = ids.substring(0, ids.length-1);
+            names = names.substring(0, names.length-1);
+            delEmp(ids, names);
+        })
     });
 
     $("#edit_emp_btn").click(function () {
@@ -254,6 +285,7 @@
         $("#table").find('tbody').empty();
         var emps = result.map.pageInfo.list;
         $.each(emps, function (index, emp) {
+            var checkBoxTd = $("<td><input type='checkbox' class='check-item'></td>");
             var empIdTd = $("<td></td>").append(emp.empId);
             var empNameTd = $("<td></td>").append(emp.empName);
             var genderTd = $("<td></td>").append(emp.gender === "M" ? "男" : "女");
@@ -261,11 +293,12 @@
             var departmentTd = $("<td></td>").append(emp.department.deptName);
             var editBtn = $("<Button></Button>").addClass("btn btn-info btn-sm").attr("onclick", "openEditModal("+ emp.empId +");")
                 .append($("<span></span>").addClass("glyphicon glyphicon-pencil").append("编辑"));
-            var delBtn = $("<Button></Button>").addClass("btn btn-danger btn-sm")
+            var delBtn = $("<Button></Button>").addClass("btn btn-danger btn-sm").attr("onclick", "delEmp("+ emp.empId + ",'" + emp.empName +"');")
                 .append($("<span></span>").addClass("glyphicon glyphicon-trash").append("删除"));
             var editTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
 
-            $("<tr></tr>").append(empIdTd)
+            $("<tr></tr>").append(checkBoxTd)
+                .append(empIdTd)
                 .append(empNameTd)
                 .append(genderTd)
                 .append(emailTd)
@@ -413,6 +446,20 @@
         reset_form("#editEmpInfoForm");
         getAllDeps($("#editEmpInfoForm").find("select"));
         getEmp(empId);
+    }
+
+    function delEmp(empId, empName) {
+        if (confirm("确定要删除员工["+ empName +"]吗？")){
+            $.ajax({
+                url:"${ctxPath}/emp/"+empId,
+                type:"DELETE",
+                success:function (result) {
+                    toPage(currentPage);
+                    alert(result.msg);
+                    $("#checkAllBox").prop("checked", "");
+                }
+            })
+        }
     }
 </script>
 </body>

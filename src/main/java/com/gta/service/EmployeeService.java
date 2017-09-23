@@ -18,4 +18,6 @@ public interface EmployeeService {
     Employee getEmp(Integer id);
 
     int updateEmployee(Employee employee);
+
+    int delEmpByBatch(List<Integer> ids);
 }
