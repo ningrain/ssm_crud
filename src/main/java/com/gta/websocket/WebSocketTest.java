@@ -34,7 +34,7 @@ public class WebSocketTest {
     }
 
     @OnMessage
-    public void onMessage(String msg, Session session){
+    public void onMessage(String msg){
         System.out.println("来自客户端的消息：" + msg);
         for (WebSocketTest webSocketTest : webSocketSet){
             try {
@@ -46,12 +46,12 @@ public class WebSocketTest {
     }
 
     @OnError
-    public void onError(Session session, Throwable error){
+    public void onError(Throwable error){
         System.out.println("发生错误");
         error.printStackTrace();
     }
 
-    public void sendMessage(String message) throws IOException{
+    private void sendMessage(String message) throws IOException{
         this.session.getBasicRemote().sendText(message);
     }
 }

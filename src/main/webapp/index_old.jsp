@@ -43,7 +43,7 @@
         };
 
         window.onbeforeunload = function () {
-            alert('确定要关闭窗口，同时关闭WebSocket连接吗？')
+            alert('确定要关闭窗口，同时关闭WebSocket连接吗？');
             closeWebSocket();
         };
 

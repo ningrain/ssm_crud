@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.gta.bean.Employee;
 import com.gta.service.EmployeeService;
 import com.gta.util.Message;
+import com.gta.websocket.WebSocketTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,8 @@ public class EmployeeController {
         PageHelper.startPage(pageNumber, 5);
         List<Employee> emps = employeeService.getAllEmpls();
         PageInfo pageInfo = new PageInfo(emps, 5);
+        WebSocketTest webSocketTest = new WebSocketTest();
+        webSocketTest.onMessage("websocket test");
         return Message.success().builder("pageInfo", pageInfo);
     }
 
