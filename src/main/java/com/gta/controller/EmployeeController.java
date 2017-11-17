@@ -29,7 +29,7 @@ public class EmployeeController {
     @RequestMapping("/emps")
     @ResponseBody
     public Message getEmpPages(@RequestParam(value = "pageNumber", defaultValue = "1") Integer pageNumber){
-        PageHelper.startPage(pageNumber, 5);
+        PageHelper.startPage(pageNumber, 10);
         List<Employee> emps = employeeService.getAllEmpls();
         PageInfo pageInfo = new PageInfo(emps, 5);
         WebSocketTest webSocketTest = new WebSocketTest();

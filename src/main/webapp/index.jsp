@@ -273,6 +273,7 @@
             type: "GET",
             data: "pageNumber=" + pageNum,
             success: function (result) {
+                $("#checkAllBox").attr("checked", false);
                 build_table(result);
                 build_page_info(result);
                 build_page_nav(result);

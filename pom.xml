@@ -135,6 +135,17 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <!--解决mapper文件夹不位于项目根目录中不编译问题-->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>
