@@ -1,5 +1,7 @@
 package com.gta.util;
 
+import com.gta.enums.StatusCode;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,15 +22,17 @@ public class Message {
 
     public static Message success(){
         Message msg = new Message();
-        msg.setCode(200);
-        msg.setMsg("成功");
+        msg.setCode(StatusCode.SUCCESS.getCode());
+        msg.setMsg(StatusCode.SUCCESS.getMsg());
         return msg;
     }
 
     public static Message fail(){
         Message msg = new Message();
-        msg.setCode(500);
-        msg.setMsg("失败");
+        //msg.setCode(500);
+        msg.setCode(StatusCode.FAIL.getCode());
+        //msg.setMsg("失败");
+        msg.setMsg(StatusCode.FAIL.getMsg());
         return msg;
     }
 

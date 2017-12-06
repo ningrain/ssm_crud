@@ -16,6 +16,8 @@
 
     <context:property-placeholder location="classpath*:*.properties"/>
 
+    <bean id="springUtil" class="com.gta.util.SpringUtil"/>
+
     <bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="jdbcUrl" value="${jdbc.url}"/>
         <property name="driverClass" value="${jdbc.driverClassName}"/>
