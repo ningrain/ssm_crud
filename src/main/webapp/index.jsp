@@ -492,8 +492,8 @@
                         toPage(currentPage);
                         if (result.code === 200){
                             fixAlertModal("glyphicon glyphicon-ok", "删除成功!")
+                            $("#checkAllBox").prop("checked", "");
                         }
-                        $("#checkAllBox").prop("checked", "");
                     }
                 })
             });

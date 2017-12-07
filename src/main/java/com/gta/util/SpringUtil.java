@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * Desc:
+ * Desc: 可以在任何代码任何地方任何时候取出ApplicaitonContext.
  * User: jiangningning
  * Date: 2017/12/5
  * Time: 10:49

@@ -7,7 +7,6 @@
     <title>Title</title>
 </head>
 <body>
-    <button type="button" class="btn btn-success">Button</button>
     <h1>Welcome WebSocket World!</h1>
     <hr>
     <label for="text"></label><input id="text" type="text"/>
