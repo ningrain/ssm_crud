@@ -29,9 +29,7 @@ public class Message {
 
     public static Message fail(){
         Message msg = new Message();
-        //msg.setCode(500);
         msg.setCode(StatusCode.FAIL.getCode());
-        //msg.setMsg("失败");
         msg.setMsg(StatusCode.FAIL.getMsg());
         return msg;
     }

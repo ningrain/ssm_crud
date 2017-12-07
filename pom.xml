@@ -146,7 +146,7 @@
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
-                    <include>**/*.xml</include>
+                    <include>com/gta/mapper/*.xml</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>

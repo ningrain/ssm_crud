@@ -156,6 +156,28 @@
             </div>
         </div>
     </div>
+
+    <!-- 弹框模态框 -->
+    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        <span id="alertIco" aria-hidden="true"></span>
+                        <span id="alertMsg"></span>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <script type="text/javascript">
 
@@ -188,9 +210,13 @@
                 type: "POST",
                 data: $("#empInfoForm").serialize(),
                 success: function (result) {
-                    alert(result.msg);
-                    $("#addEmpModal").modal("hide");
+                    $("#addEmpModal").modal('hide');
                     toPage(totalRecords);
+                    if (result.code === 200){
+                        fixAlertModal("glyphicon glyphicon-ok", "新增成功!")
+                    }else {
+                        fixAlertModal("glyphicon glyphicon-remove", "新增失败!")
+                    }
                 }
             })
         });
@@ -225,12 +251,12 @@
             var names = '';
             var ids = '';
             if ($(".check-item:checked").length === 0){
-                alert("请先选择员工！");
+                fixAlertModal("glyphicon glyphicon-exclamation-sign", "请先选择需要删除的员工!");
                 return false;
             }else{
                 $.each($(".check-item"), function () {
                     if ($(this).prop("checked")){
-                        ids = ids + $(this).parent().next().text() + ",";
+                        ids = ids + $(this).next().attr("id") + ",";
                         names = names + $(this).parent().next().next().text() + ",";
                     }
                 });
@@ -248,9 +274,13 @@
                 type:"PUT",
                 data:$("#editEmpInfoForm").serialize(),
                 success:function (result) {
-                    alert(result.msg);
                     $("#editEmpModal").modal('hide');
                     toPage(currentPage);
+                    if (result.code === 200){
+                        fixAlertModal("glyphicon glyphicon-ok", "提交成功!")
+                    }else {
+                        fixAlertModal("glyphicon glyphicon-remove", "提交失败!")
+                    }
                 }
             })
         }
@@ -286,8 +316,8 @@
         $("#table").find('tbody').empty();
         var emps = result.map.pageInfo.list;
         $.each(emps, function (index, emp) {
-            var checkBoxTd = $("<td><input type='checkbox' class='check-item'></td>");
-            var empIdTd = $("<td></td>").append(emp.empId);
+            var checkBoxTd = $("<td><input type='checkbox' class='check-item'><input type='hidden' id='" + emp.empId + "'></td>");
+            var empIdTd = $("<td></td>").append((result.map.pageInfo.pageNum - 1) * 10 + index + 1);
             var empNameTd = $("<td></td>").append(emp.empName);
             var genderTd = $("<td></td>").append(emp.gender === "M" ? "男" : "女");
             var emailTd = $("<td></td>").append(emp.email);
@@ -450,17 +480,29 @@
     }
 
     function delEmp(empId, empName) {
-        if (confirm("确定要删除员工["+ empName +"]吗？")){
-            $.ajax({
-                url:"${ctxPath}/emp/"+empId,
-                type:"DELETE",
-                success:function (result) {
-                    toPage(currentPage);
-                    alert(result.msg);
-                    $("#checkAllBox").prop("checked", "");
+        Ewin.confirm({message: "确定要删除员工["+ empName +"]吗？"})
+            .on(function (e) {
+                if (!e){
+                    return;
                 }
-            })
-        }
+                $.ajax({
+                    url:"${ctxPath}/emp/"+empId,
+                    type:"DELETE",
+                    success:function (result) {
+                        toPage(currentPage);
+                        if (result.code === 200){
+                            fixAlertModal("glyphicon glyphicon-ok", "删除成功!")
+                        }
+                        $("#checkAllBox").prop("checked", "");
+                    }
+                })
+            });
+    }
+    
+    function fixAlertModal(icoClass, msg) {
+        $("#alertIco").attr("class", icoClass);
+        $("#alertMsg").text(msg);
+        $("#alertModal").modal();
     }
 </script>
 </body>
