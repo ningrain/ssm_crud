@@ -10,8 +10,11 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-8">
             <h1>SSM_CRUD</h1>
+        </div>
+        <div id="weatherInfo" class="col-xs-4">
+            <span>合肥今天天气：</span>
         </div>
     </div>
     <div class="row">
@@ -312,6 +315,11 @@
     }
 
     function build_table(result) {
+        $("#weatherInfo").find("span").append(result.map.weather.type)
+            .append(" ")
+            .append(result.map.weather.low.substring(3, 10))
+            .append("~")
+            .append(result.map.weather.high.substring(3, 10));
         // $("#table tbody") IDEA提示效率低
         $("#table").find('tbody').empty();
         var emps = result.map.pageInfo.list;

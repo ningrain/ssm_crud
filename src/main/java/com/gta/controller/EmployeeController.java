@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gta.bean.Employee;
 import com.gta.service.EmployeeService;
+import com.gta.singleton.Weather;
 import com.gta.util.Message;
 import com.gta.websocket.WebSocketTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,8 @@ public class EmployeeController {
         PageInfo pageInfo = new PageInfo(emps, 5);
         WebSocketTest webSocketTest = new WebSocketTest();
         webSocketTest.onMessage("websocket test");
-        return Message.success().builder("pageInfo", pageInfo);
+        Weather weather = Weather.getInstance();
+        return Message.success().builder("pageInfo", pageInfo).builder("weather", weather);
     }
 
     //@RequestMapping("/emps")

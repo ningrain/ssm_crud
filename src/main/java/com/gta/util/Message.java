@@ -18,7 +18,7 @@ public class Message {
     //消息
     private String msg;
     //数据
-    private Map<String, Object> map = new HashMap<String, Object>();
+    private Map<String, Object> map = new HashMap<>();
 
     public static Message success(){
         Message msg = new Message();
