@@ -24,7 +24,7 @@ public class SpringTask {
         getWeatherType();
     }
 
-    @Scheduled(cron = "0/5 * * * * ?")
+    //@Scheduled(cron = "0/5 * * * * ?")
     public void taskJobTest(){
         WebSocketTest webSocketTest = new WebSocketTest();
         webSocketTest.onMessage("5秒发送一次");

@@ -16,7 +16,7 @@
 
     <context:property-placeholder location="classpath*:*.properties"/>
 
-    <bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="jdbcUrl" value="${jdbc.url}"/>
         <property name="driverClass" value="${jdbc.driverClassName}"/>
         <property name="user" value="${jdbc.user}"/>

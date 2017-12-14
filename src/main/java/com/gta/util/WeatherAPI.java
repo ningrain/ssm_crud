@@ -184,10 +184,108 @@ public class WeatherAPI {
                 "        ]\n" +
                 "    }\n" +
                 "}", "data");
-        String s = (String) WeatherAPI.getValue(str, "forecast");
+        String str1 = "{\n" +
+                "    \"date\": \"20171212\",\n" +
+                "    \"message\": \"Success !\",\n" +
+                "    \"status\": 200,\n" +
+                "    \"city\": \"北京\",\n" +
+                "    \"count\": 541,\n" +
+                "    \"data\": {\n" +
+                "        \"shidu\": \"21%\",\n" +
+                "        \"pm25\": 5,\n" +
+                "        \"pm10\": 17,\n" +
+                "        \"quality\": \"优\",\n" +
+                "        \"wendu\": \"-5\",\n" +
+                "        \"ganmao\": \"各类人群可自由活动\",\n" +
+                "        \"yesterday\": {\n" +
+                "            \"date\": \"11日星期一\",\n" +
+                "            \"sunrise\": \"07:25\",\n" +
+                "            \"high\": \"高温 2.0℃\",\n" +
+                "            \"low\": \"低温 -8.0℃\",\n" +
+                "            \"sunset\": \"16:49\",\n" +
+                "            \"aqi\": 30,\n" +
+                "            \"fx\": \"北风\",\n" +
+                "            \"fl\": \"3-4级\",\n" +
+                "            \"type\": \"晴\",\n" +
+                "            \"notice\": \"lovely sunshine，尽情享受阳光的温暖吧\"\n" +
+                "        },\n" +
+                "        \"forecast\": [\n" +
+                "            {\n" +
+                "                \"date\": \"12日星期二\",\n" +
+                "                \"sunrise\": \"07:26\",\n" +
+                "                \"high\": \"高温 -1.0℃\",\n" +
+                "                \"low\": \"低温 -8.0℃\",\n" +
+                "                \"sunset\": \"16:50\",\n" +
+                "                \"aqi\": 64,\n" +
+                "                \"fx\": \"东北风\",\n" +
+                "                \"fl\": \"<3级\",\n" +
+                "                \"type\": \"多云\",\n" +
+                "                \"notice\": \"悠悠的云里有淡淡的诗\"\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"date\": \"13日星期三\",\n" +
+                "                \"sunrise\": \"07:26\",\n" +
+                "                \"high\": \"高温 1.0℃\",\n" +
+                "                \"low\": \"低温 -7.0℃\",\n" +
+                "                \"sunset\": \"16:50\",\n" +
+                "                \"aqi\": 77,\n" +
+                "                \"fx\": \"东北风\",\n" +
+                "                \"fl\": \"<3级\",\n" +
+                "                \"type\": \"晴\",\n" +
+                "                \"notice\": \"lovely sunshine，尽情享受阳光的温暖吧\"\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"date\": \"14日星期四\",\n" +
+                "                \"sunrise\": \"07:27\",\n" +
+                "                \"high\": \"高温 -1.0℃\",\n" +
+                "                \"low\": \"低温 -5.0℃\",\n" +
+                "                \"sunset\": \"16:50\",\n" +
+                "                \"aqi\": 97,\n" +
+                "                \"fx\": \"西南风\",\n" +
+                "                \"fl\": \"<3级\",\n" +
+                "                \"type\": \"阴\",\n" +
+                "                \"notice\": \"阴天是彩虹的前期之景\"\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"date\": \"15日星期五\",\n" +
+                "                \"sunrise\": \"07:28\",\n" +
+                "                \"high\": \"高温 4.0℃\",\n" +
+                "                \"low\": \"低温 -5.0℃\",\n" +
+                "                \"sunset\": \"16:50\",\n" +
+                "                \"aqi\": 106,\n" +
+                "                \"fx\": \"北风\",\n" +
+                "                \"fl\": \"3-4级\",\n" +
+                "                \"type\": \"多云\",\n" +
+                "                \"notice\": \"悠悠的云里有淡淡的诗\"\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"date\": \"16日星期六\",\n" +
+                "                \"sunrise\": \"07:29\",\n" +
+                "                \"high\": \"高温 2.0℃\",\n" +
+                "                \"low\": \"低温 -6.0℃\",\n" +
+                "                \"sunset\": \"16:50\",\n" +
+                "                \"aqi\": 33,\n" +
+                "                \"fx\": \"西北风\",\n" +
+                "                \"fl\": \"3-4级\",\n" +
+                "                \"type\": \"晴\",\n" +
+                "                \"notice\": \"lovely sunshine，尽情享受阳光的温暖吧\"\n" +
+                "            }\n" +
+                "        ]\n" +
+                "    }\n" +
+                "}";
+        /*String s = (String) WeatherAPI.getValue(str, "forecast");
         JSONArray jsonArray = JSONObject.parseArray(s);
+        JSONObject jsonObject = JSONObject.parseObject(s);
+        System.out.println(jsonObject);
         System.out.println(jsonArray.get(0).toString());
         String type = (String) WeatherAPI.getValue(jsonArray.get(0).toString(), "type");
+        System.out.println(type);*/
+
+        JSONObject jsonObject1 = JSONObject.parseObject(str1);
+        JSONObject jsonObject2 = jsonObject1.getJSONObject("data");
+        JSONArray array = jsonObject2.getJSONArray("forecast");
+        JSONObject jsonObject3 = array.getJSONObject(0);
+        String type = (String) jsonObject3.get("type");
         System.out.println(type);
     }
 }

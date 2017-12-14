@@ -46,6 +46,26 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+
+    <!-- 在类MyServlet上使用 @WebServlet("/myServlet") 注解，此处便可不用配置， 但二者不可共存 -->
+    <!--<servlet>
+        <servlet-name>myServlet</servlet-name>
+        <servlet-class>com.gta.servlet.MyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>myServlet</servlet-name>
+        <url-pattern>/myServlet</url-pattern>
+    </servlet-mapping>-->
+
+    <servlet>
+        <servlet-name>errorHandler</servlet-name>
+        <servlet-class>com.gta.servlet.ErrorHandler</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>errorHandler</servlet-name>
+        <url-pattern>/errorHandler</url-pattern>
+    </servlet-mapping>
+    
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -85,9 +105,45 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>myFilter1</filter-name>
+        <filter-class>com.gta.filter.MyFilter1</filter-class>
+        <init-param>
+            <param-name>project</param-name>
+            <param-value>localhost-ssm_crud1</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>myFilter1</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 使用 @WebFilter(filterName = "myFilter2", urlPatterns = "/*") 注解可实现相同的效果，二者不可同时配置 -->
+    <!--<filter>
+        <filter-name>myFilter2</filter-name>
+        <filter-class>com.gta.filter.MyFilter2</filter-class>
+        <init-param>
+            <param-name>project</param-name>
+            <param-value>localhost-ssm_crud2</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>myFilter2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errorHandler</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.RuntimeException</exception-type>
+        <location>/errorHandler</location>
+    </error-page>
 
 </web-app>
         
