@@ -21,6 +21,7 @@
         <div class="col-md-4 col-md-offset-8">
             <button type="button" id="add_btn" class="btn btn-primary">新增</button>
             <button type="button" id="del_btn" class="btn btn-danger">删除</button>
+            <button type="button" id="upload_btn" class="btn btn-primary">上传文件</button>
         </div>
     </div>
     <div class="row">
@@ -127,7 +128,8 @@
                         <div class="form-group">
                             <label for="editEmail" class="col-sm-2 control-label">邮箱地址:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="editEmail" name="email" placeholder="请输入邮箱地址">
+                                <input type="text" class="form-control" id="editEmail" name="email"
+                                       placeholder="请输入邮箱地址">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -165,7 +167,8 @@
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">提示</h4>
                 </div>
                 <div class="modal-body">
@@ -181,6 +184,27 @@
         </div>
     </div>
 
+    <!-- 上传文件模态框 -->
+    <div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <form id="uploadFileForm" action="${ctxPath}/uploadFile" enctype="multipart/form-data" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">上传文件</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label for="uploadFile">请选择文件</label>
+                        <input type="file" name="uploadFile" id="uploadFile">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" id="upload" class="btn btn-primary" data-dismiss="modal" value="上传"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
 
@@ -202,10 +226,10 @@
         });
 
         $("#save_emp_btn").click(function () {
-            if(!validateForm()){
+            if (!validateForm()) {
                 return false;
             }
-            if($(this).attr("ajax-va")==="fail"){
+            if ($(this).attr("ajax-va") === "fail") {
                 return false;
             }
             $.ajax({
@@ -215,9 +239,9 @@
                 success: function (result) {
                     $("#addEmpModal").modal('hide');
                     toPage(totalRecords);
-                    if (result.code === 200){
+                    if (result.code === 200) {
                         fixAlertModal("glyphicon glyphicon-ok", "新增成功!")
-                    }else {
+                    } else {
                         fixAlertModal("glyphicon glyphicon-remove", "新增失败!")
                     }
                 }
@@ -230,10 +254,10 @@
                 type: "POST",
                 data: {"empName": $("#empName").val()},
                 success: function (result) {
-                    if (result.code === 200){
+                    if (result.code === 200) {
                         validStyle($("#empName"), "success", "");
                         $("#save_emp_btn").attr("ajax-va", "success");
-                    }else {
+                    } else {
                         validStyle($("#empName"), "fail", "该用户名已经存在,请重新输入");
                         $("#save_emp_btn").attr("ajax-va", "fail");
                     }
@@ -253,35 +277,40 @@
         $("#del_btn").click(function () {
             var names = '';
             var ids = '';
-            if ($(".check-item:checked").length === 0){
+            if ($(".check-item:checked").length === 0) {
                 fixAlertModal("glyphicon glyphicon-exclamation-sign", "请先选择需要删除的员工!");
                 return false;
-            }else{
+            } else {
                 $.each($(".check-item"), function () {
-                    if ($(this).prop("checked")){
+                    if ($(this).prop("checked")) {
                         ids = ids + $(this).next().attr("id") + ",";
                         names = names + $(this).parent().next().next().text() + ",";
                     }
                 });
             }
-            ids = ids.substring(0, ids.length-1);
-            names = names.substring(0, names.length-1);
+            ids = ids.substring(0, ids.length - 1);
+            names = names.substring(0, names.length - 1);
             delEmp(ids, names);
-        })
+        });
+
+        $("#upload_btn").click(function () {
+            $("#uploadFileModal").modal();
+        });
+
     });
 
     $("#edit_emp_btn").click(function () {
-        if (vlidateEmail($("#editEmail"))){
+        if (vlidateEmail($("#editEmail"))) {
             $.ajax({
-                url:"${ctxPath}/emp",
-                type:"PUT",
-                data:$("#editEmpInfoForm").serialize(),
-                success:function (result) {
+                url: "${ctxPath}/emp",
+                type: "PUT",
+                data: $("#editEmpInfoForm").serialize(),
+                success: function (result) {
                     $("#editEmpModal").modal('hide');
                     toPage(currentPage);
-                    if (result.code === 200){
+                    if (result.code === 200) {
                         fixAlertModal("glyphicon glyphicon-ok", "提交成功!")
-                    }else {
+                    } else {
                         fixAlertModal("glyphicon glyphicon-remove", "提交失败!")
                     }
                 }
@@ -291,10 +320,10 @@
 
     function vlidateEmail(elem) {
         var regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-        if (!regEmail.test(elem.val())){
+        if (!regEmail.test(elem.val())) {
             validStyle(elem, "fail", "请输入正确的邮箱格式");
             return false;
-        }else {
+        } else {
             validStyle(elem, "success", "");
             return true;
         }
@@ -330,9 +359,9 @@
             var genderTd = $("<td></td>").append(emp.gender === "M" ? "男" : "女");
             var emailTd = $("<td></td>").append(emp.email);
             var departmentTd = $("<td></td>").append(emp.department.deptName);
-            var editBtn = $("<Button></Button>").addClass("btn btn-info btn-sm").attr("onclick", "openEditModal("+ emp.empId +");")
+            var editBtn = $("<Button></Button>").addClass("btn btn-info btn-sm").attr("onclick", "openEditModal(" + emp.empId + ");")
                 .append($("<span></span>").addClass("glyphicon glyphicon-pencil").append("编辑"));
-            var delBtn = $("<Button></Button>").addClass("btn btn-danger btn-sm").attr("onclick", "delEmp("+ emp.empId + ",'" + emp.empName +"');")
+            var delBtn = $("<Button></Button>").addClass("btn btn-danger btn-sm").attr("onclick", "delEmp(" + emp.empId + ",'" + emp.empName + "');")
                 .append($("<span></span>").addClass("glyphicon glyphicon-trash").append("删除"));
             var editTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
 
@@ -422,10 +451,10 @@
 
     function getEmp(empId) {
         $.ajax({
-            url:"${ctxPath}/emp/"+empId,
-            type:"GET",
-            async:false,
-            success:function (result) {
+            url: "${ctxPath}/emp/" + empId,
+            type: "GET",
+            async: false,
+            success: function (result) {
                 var emp = result.map.emp;
                 $("#editEmpId").val(emp.empId);
                 $("#editEmpName").text(emp.empName);
@@ -440,19 +469,19 @@
         var $empName = $("#empName");
         var empName = $empName.val();
         var regEmpName = /(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})/;
-        if (!regEmpName.test(empName)){
+        if (!regEmpName.test(empName)) {
             validStyle($empName, "fail", "请输入2~5个汉字或者3~16个字母和数字组合");
             return false;
-        }else {
+        } else {
             validStyle($empName, "success", "");
         }
         var $email = $("#email");
         var email = $email.val();
         var regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-        if (!regEmail.test(email)){
+        if (!regEmail.test(email)) {
             validStyle($email, "fail", "请输入正确的邮箱格式");
             return false;
-        }else {
+        } else {
             validStyle($email, "success", "");
         }
         return true;
@@ -460,17 +489,17 @@
 
     function validStyle(elem, status, msg) {
         elem.parent().removeClass("has-success has-error");
-        if (status === "success"){
+        if (status === "success") {
             elem.parent().addClass("has-success");
             elem.next().text("");
-        }else if (status === "fail"){
+        } else if (status === "fail") {
             elem.parent().addClass("has-error");
             elem.next().text(msg);
         }
     }
 
     //清空表单样式及内容
-    function reset_form(ele){
+    function reset_form(ele) {
         $(ele)[0].reset();
         //清空表单样式
         $(ele).find("*").removeClass("has-error has-success");
@@ -488,17 +517,17 @@
     }
 
     function delEmp(empId, empName) {
-        Ewin.confirm({message: "确定要删除员工["+ empName +"]吗？"})
+        Ewin.confirm({message: "确定要删除员工[" + empName + "]吗？"})
             .on(function (e) {
-                if (!e){
+                if (!e) {
                     return;
                 }
                 $.ajax({
-                    url:"${ctxPath}/emp/"+empId,
-                    type:"DELETE",
-                    success:function (result) {
+                    url: "${ctxPath}/emp/" + empId,
+                    type: "DELETE",
+                    success: function (result) {
                         toPage(currentPage);
-                        if (result.code === 200){
+                        if (result.code === 200) {
                             fixAlertModal("glyphicon glyphicon-ok", "删除成功!")
                             $("#checkAllBox").prop("checked", "");
                         }
@@ -506,7 +535,7 @@
                 })
             });
     }
-    
+
     function fixAlertModal(icoClass, msg) {
         $("#alertIco").attr("class", icoClass);
         $("#alertMsg").text(msg);
