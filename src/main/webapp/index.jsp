@@ -13,8 +13,9 @@
         <div class="col-xs-8">
             <h1>SSM_CRUD</h1>
         </div>
-        <div id="weatherInfo" class="col-xs-4">
+        <div class="col-xs-4">
             <span>合肥今天天气：</span>
+            <span id="weatherInfo"></span>
         </div>
     </div>
     <div class="row">
@@ -195,11 +196,11 @@
                         <h4 class="modal-title">上传文件</h4>
                     </div>
                     <div class="modal-body">
-                        <label for="uploadFile">请选择文件</label>
-                        <input type="file" name="uploadFile" id="uploadFile">
+                        <label>请选择文件</label>
+                        <input type="file" name="uploadFile">
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" id="upload" class="btn btn-primary" data-dismiss="modal" value="上传"/>
+                        <button type="submit" class="btn btn-primary">上传</button>
                     </div>
                 </form>
             </div>
@@ -335,6 +336,13 @@
             type: "GET",
             data: "pageNumber=" + pageNum,
             success: function (result) {
+                var $weatherInfo = $("#weatherInfo");
+                $weatherInfo.empty();
+                $weatherInfo.append(result.map.weather.type)
+                    .append(" ")
+                    .append(result.map.weather.low.substring(3, 10))
+                    .append("~")
+                    .append(result.map.weather.high.substring(3, 10));
                 $("#checkAllBox").attr("checked", false);
                 build_table(result);
                 build_page_info(result);
@@ -344,11 +352,6 @@
     }
 
     function build_table(result) {
-        $("#weatherInfo").find("span").append(result.map.weather.type)
-            .append(" ")
-            .append(result.map.weather.low.substring(3, 10))
-            .append("~")
-            .append(result.map.weather.high.substring(3, 10));
         // $("#table tbody") IDEA提示效率低
         $("#table").find('tbody').empty();
         var emps = result.map.pageInfo.list;

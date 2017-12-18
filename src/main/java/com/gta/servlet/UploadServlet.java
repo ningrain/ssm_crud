@@ -30,7 +30,7 @@ public class UploadServlet extends HttpServlet {
     private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
 
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         if (!ServletFileUpload.isMultipartContent(req)) {
             // 如果不是则停止
@@ -39,6 +39,18 @@ public class UploadServlet extends HttpServlet {
             writer.flush();
             return;
         }
+
+/*        String realPath = req.getSession().getServletContext().getRealPath("/upload");
+        System.out.println(realPath);
+        System.out.println(req.getContextPath());
+        System.out.println(req.getServletPath());
+        System.out.println(req.getServletContext());
+
+        String realPath1 = req.getSession().getServletContext().getRealPath("/resources/");
+        String filePath = File.separator+System.nanoTime();
+        System.out.println(realPath1);
+        System.out.println(filePath);*/
+
         // 配置上传参数
         DiskFileItemFactory factory = new DiskFileItemFactory();
         // 设置内存临界值 - 超过后将产生临时文件并存储于临时目录中
@@ -59,9 +71,7 @@ public class UploadServlet extends HttpServlet {
 
         // 构造临时路径来存储上传的文件
         // 这个路径相对当前应用的目录
-        String path = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-        String uploadPath = path + UPLOAD_DIRECTORY;
-
+        String uploadPath = req.getServletContext().getRealPath("./") + File.separator + UPLOAD_DIRECTORY;
 
         // 如果目录不存在则创建
         File uploadDir = new File(uploadPath);
@@ -92,6 +102,9 @@ public class UploadServlet extends HttpServlet {
             }
         } catch (Exception ex) {
             req.setAttribute("message", "错误信息: " + ex.getMessage());
+            ex.printStackTrace();
         }
+        //resp.sendRedirect(req.getContextPath() + "/message.jsp");
+        req.getServletContext().getRequestDispatcher("/message.jsp").forward(req, resp);
     }
 }
