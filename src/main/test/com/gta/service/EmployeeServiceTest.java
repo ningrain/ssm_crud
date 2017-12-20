@@ -16,7 +16,7 @@ public class EmployeeServiceTest extends BaseTest {
     private EmployeeService employeeService;
 
     @Test
-    public void checkEmp() throws Exception {
+    public void checkEmp() {
         System.out.println(employeeService.checkEmp("bbbb"));
     }
 

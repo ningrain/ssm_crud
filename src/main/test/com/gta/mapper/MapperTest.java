@@ -7,12 +7,9 @@ import com.gta.dao.DepartmentMapper;
 import com.gta.dao.EmployeeMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -36,6 +33,8 @@ public class MapperTest extends BaseTest{
     }
 
     @Test
+    //@Transactional : 此注解置于测试方法上，可使测试方法正常测试，同时对于数据库的操作执行回滚
+    @Transactional
     public void test2(){
         departmentMapper.insertSelective(new Department(null, "开发部"));
         departmentMapper.insertSelective(new Department(null, "测试部"));
@@ -47,6 +46,7 @@ public class MapperTest extends BaseTest{
     }
 
     @Test
+    @Transactional
     public void test4(){
         EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
 

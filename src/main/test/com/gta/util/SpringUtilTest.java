@@ -17,16 +17,16 @@ public class SpringUtilTest extends BaseTest {
     private SpringUtil springUtil;
 
     @Test
-    public void getApplicationContext() throws Exception {
+    public void getApplicationContext() {
     }
 
     @Test
-    public void getBeanByName() throws Exception {
+    public void getBeanByName() {
         System.out.println("Bean --> employeeServiceImpl:" + SpringUtil.getBean("employeeServiceImpl"));
     }
 
     @Test
-    public void getBeanByClass() throws Exception {
+    public void getBeanByClass() {
         System.out.println("Bean --> employeeServiceImpl:" + SpringUtil.getBean(EmployeeServiceImpl.class));
     }
 

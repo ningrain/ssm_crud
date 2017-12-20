@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class MBGTest {
     public static void main(String[] args) throws Exception {
-        List<String> warnings = new ArrayList<String>();
+        List<String> warnings = new ArrayList<>();
         boolean overwrite = true;
         File configFile = new File("mbg.xml");
         ConfigurationParser cp = new ConfigurationParser(warnings);

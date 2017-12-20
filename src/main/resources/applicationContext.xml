@@ -42,9 +42,9 @@
         <property name="dataSource" ref="pooledDataSource"/>
     </bean>
 
-    <!--基于注解的事务管理-->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!--基于注解的事务管理 默认（transaction-manager="transactionManager"） 可以省略-->
+    <tx:annotation-driven/>
 
-    <task:annotation-driven scheduler="qbScheduler" mode="proxy"/>
+    <task:annotation-driven scheduler="qbScheduler"/>
     <task:scheduler id="qbScheduler" pool-size="10"/>
 </beans>
