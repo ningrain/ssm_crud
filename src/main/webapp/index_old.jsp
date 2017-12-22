@@ -20,7 +20,7 @@
     <script type="application/javascript">
         var websocket = null;
         if ('WebSocket' in window){
-            websocket = new WebSocket("ws://localhost:8080/ssm_crud/websocket");
+            websocket = new WebSocket("ws://localhost:8082/ssm_crud/websocket");
         }else {
             alert('当前浏览器不支持WebSocket！');
         }
