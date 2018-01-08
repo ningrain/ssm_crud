@@ -23,6 +23,10 @@
         <option>--请选择--</option>
     </select>
 
+    <div id="text">
+        <span id="leftTime">3</span>秒后弹出1
+    </div>
+
     <script type="text/javascript">
         //定义数组，存储省份信息
         var province = ["北京", "上海", "天津", "重庆", "浙江", "江苏", "广东", "福建", "湖南", "湖北", "辽宁",
@@ -83,6 +87,25 @@
             });
         });
 
+        var $leftTime = $("#leftTime");
+        var num = Number($leftTime.text());
+        appendLeftTime();
+        function appendLeftTime() {
+            if (num === 0) {
+                $leftTime.empty();
+                $leftTime.append(num);
+                // alert(1);
+                window.location.href = "http://www.baidu.com";
+            } else {
+                setTimeout(function () {
+                    num--;
+                    $leftTime.empty();
+                    $leftTime.append(num);
+                    appendLeftTime();
+                }, 1000);
+            }
+        }
+        
         function setProvince() {
             for (var i = 0; i < province.length; i++) {
                 $province.append("<option value='" + province[i] + "'>" + province[i] + "</option>")

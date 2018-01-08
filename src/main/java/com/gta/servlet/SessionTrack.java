@@ -1,5 +1,7 @@
 package com.gta.servlet;
 
+import com.gta.util.SecContext;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +34,9 @@ public class SessionTrack extends HttpServlet{
         long lastAccessedTime = session.getLastAccessedTime();
         System.out.println("session最后访问时间：" + new Date(lastAccessedTime));
 
+        System.out.println("sessionId=" + session.getId());
+        SecContext.getInstance().addSession(session.getId(), session);
+        System.out.println(SecContext.getSessionMap());
 
     }
 }
