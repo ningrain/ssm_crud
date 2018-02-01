@@ -1,5 +1,6 @@
 package util;
 
+import com.gta.bean.Course;
 import com.gta.util.ReadExcelUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +8,6 @@ import org.junit.runners.JUnit4;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.Supplier;
 
 /**
  * Desc:
@@ -154,22 +154,31 @@ public class DemoTest {
             String filePath = "E:\\test.xlsx";
             ReadExcelUtils excelReader = new ReadExcelUtils(filePath);
             // 对读取Excel表格标题测试
-            /*String[] title = excelReader.readExcelTitle();
+            String[] title = excelReader.readExcelTitle();
             System.out.println("获得Excel表格的标题:");
             for (String s : title) {
                 System.out.print(s + " ");
-            }*/
-
+            }
+            System.out.println();
             // 对读取Excel表格内容测试
-            Map<Integer, Map<Integer, Object>> map;
-            excelReader.readExcelTitle();
-            map = excelReader.readExcelContent();
+            Map<Integer, Map<Integer, Object>> map = excelReader.readExcelContent();
             System.out.println("获得Excel表格的内容:");
             for (int i = 1; i <= map.size(); i++) {
                 System.out.println(map.get(i));
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void demoTest8() {
+        Course c1 = new Course("1", "语文");
+        Course c2 = new Course("2", "语文");
+        //System.out.println(c1.equals(c2));
+        byte[] bytes = String.valueOf(8143).getBytes();
+        for (int i = 0; i < bytes.length; i++) {
+            System.out.println(Integer.toHexString(bytes[i]));
         }
     }
 

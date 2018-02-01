@@ -91,16 +91,14 @@
         var num = Number($leftTime.text());
         appendLeftTime();
         function appendLeftTime() {
+            $leftTime.empty();
+            $leftTime.append(num);
             if (num === 0) {
-                $leftTime.empty();
-                $leftTime.append(num);
-                // alert(1);
-                window.location.href = "http://www.baidu.com";
+                alert(1);
+                //window.location.href = "http://www.baidu.com";
             } else {
                 setTimeout(function () {
                     num--;
-                    $leftTime.empty();
-                    $leftTime.append(num);
                     appendLeftTime();
                 }, 1000);
             }

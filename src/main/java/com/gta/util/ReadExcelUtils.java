@@ -9,7 +9,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,8 +47,7 @@ public class ReadExcelUtils {
     }
 
     /**
-     * 方法 readExcelTitle 功能：
-     *
+     * 方法 readExcelTitle 功能： 读取excel表头信息
      * @return String[] 表头内容的数组
      * @author ningning.jiang 2018年01月08日 10:08:17
      */
@@ -69,6 +67,11 @@ public class ReadExcelUtils {
         return title;
     }
 
+    /**
+     * 方法 readExcelContent 功能： 读取excel表格内容
+     * @return Map 内容
+     * @author ningning.jiang 2018年01月08日 11:55:46
+     */
     public Map<Integer, Map<Integer, Object>> readExcelContent() throws Exception {
         if (wb == null) {
             throw new Exception("Workbook对象为空。");
