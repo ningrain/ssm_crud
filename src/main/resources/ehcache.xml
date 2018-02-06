@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="false">
+	<!-- java.io.tmpdir – 默认临时文件路径 -->
+	<diskStore path="java.io.tmpdir" />
+	<defaultCache maxEntriesLocalHeap="1" maxEntriesLocalDisk="2"
+		eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120"
+		diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU">
+		<!--持久化，localTempSwap表示不持久化,普通版本不支持持久化 -->
+		<persistence strategy="localTempSwap" />
+	</defaultCache>
+	<!-- 设定具体的命名缓存的数据过期策略 -->
+	<!--name:命名缓存的名称 -->
+	<Cache name="baseCache" maxBytesLocalHeap="128m" maxBytesLocalDisk="2M" eternal="true"
+		diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"
+		overflowToDisk="true">
+	</Cache>
+
+	<Cache name="menuCache" maxBytesLocalHeap="8m" maxBytesLocalDisk="1M" eternal="true"
+		   diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"
+		   overflowToDisk="true">
+	</Cache>
+</ehcache>

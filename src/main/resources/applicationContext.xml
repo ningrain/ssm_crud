@@ -16,7 +16,7 @@
 
     <context:property-placeholder location="classpath*:*.properties"/>
 
-    <bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="jdbcUrl" value="${jdbc.url}"/>
         <property name="driverClass" value="${jdbc.driverClassName}"/>
         <property name="user" value="${jdbc.user}"/>
@@ -25,7 +25,7 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
-        <property name="dataSource" ref="pooledDataSource"/>
+        <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath*:com/gta/mapper/*.xml"/>
     </bean>
 
@@ -39,7 +39,11 @@
     </bean>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="pooledDataSource"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml"/>
     </bean>
 
     <!--基于注解的事务管理 默认（transaction-manager="transactionManager"） 可以省略-->

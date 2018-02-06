@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Desc:
@@ -19,7 +19,9 @@ public class SecContext {
     private static final Logger LOGGER = LoggerFactory.getLogger(SecContext.class);
 
     private static SecContext instance;
-    private static Map<String, HttpSession> sessionMap = new HashMap<String, HttpSession>();
+
+    /** ConcurrentHashMap 线程安全*/
+    private static Map<String, HttpSession> sessionMap = new ConcurrentHashMap<>();
 
     private SecContext() {
     }
@@ -31,7 +33,7 @@ public class SecContext {
         return instance;
     }
 
-    public synchronized void addSession(String id, HttpSession newSession) {
+    public void addSession(String id, HttpSession newSession) {
         if ((id == null || "".equals(id)) || newSession == null) {
             return;
         }
@@ -40,7 +42,7 @@ public class SecContext {
         LOGGER.debug("student["+id+"] is saved for integralTask...");
     }
 
-    public synchronized void delSession(String id) {
+    public void delSession(String id) {
         if (id == null || "".equals(id)) {
             return;
         }
@@ -48,7 +50,7 @@ public class SecContext {
         LOGGER.debug("student["+id+"] is delete for integralTask...");
     }
 
-    public synchronized HttpSession getSession(String id) {
+    public HttpSession getSession(String id) {
         if (id == null || "".equals(id)) {
             return null;
         }
