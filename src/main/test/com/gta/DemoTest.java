@@ -43,4 +43,12 @@ public class DemoTest extends BaseTest{
         System.out.println(EhCacheUtil.cache);
     }
 
+    @Test
+    public void test4() {
+        LOGGER.debug("This is a debug level log.");
+        LOGGER.info("This is a info level log.");
+        LOGGER.fatal("This is a fatal level log.");
+        LOGGER.error("This is an error level log.");
+    }
+
 }

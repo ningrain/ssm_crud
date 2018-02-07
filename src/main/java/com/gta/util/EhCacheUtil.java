@@ -24,6 +24,10 @@ public class EhCacheUtil {
         cache = cacheManager.getCache(BASECACHE);
     }
 
+    /** 私有化构造器 */
+    private EhCacheUtil() {
+    }
+
     /**
      * 获取缓存
      *

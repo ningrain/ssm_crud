@@ -90,7 +90,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
     private static void checkApplicationContext() {
         if (context == null)
-            throw new IllegalStateException("applicaitonContext未注入,请在applicationContext.xml中定义bean：SpringContextUtil");
+            throw new IllegalStateException("applicaitonContext未注入,请在applicationContext.xml中定义bean：SpringContextUtil或添加 @Component 注解");
     }
 
 }

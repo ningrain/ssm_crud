@@ -26,6 +26,43 @@
     <div id="text">
         <span id="leftTime">3</span>秒后弹出1
     </div>
+    
+    <br>
+    <a href="${ctxPath}/helloAjax1">Hello Ajax1</a>
+    <br>
+    <a href="${ctxPath}/helloAjax2">Hello Ajax2</a>
+    <br>
+    <a href="${ctxPath}/helloAjax3">Hello Ajax3</a>
+
+    <div id="detail">
+
+    </div>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var request = new XMLHttpRequest();
+            var url;
+            var method = "GET";
+            var aNodes = document.getElementsByTagName("a");
+            for (var i = 0; i < aNodes.length; i++) {
+                aNodes[i].onclick = function () {
+                    url = this.href;
+                    request.open(method, url);
+                    request.send(null);
+                    request.onreadystatechange = function () {
+                        if (request.readyState === 4) {
+                            if (request.status === 200 || request.status === 304) {
+                                alert(request.responseText);
+                                document.getElementById("detail").innerHTML = "detail: "+ request.responseText;
+                            }
+                        }
+                    };
+                    return false;
+                };
+            }
+        }
+    </script>
+
 
     <script type="text/javascript">
         //定义数组，存储省份信息
@@ -94,7 +131,7 @@
             $leftTime.empty();
             $leftTime.append(num);
             if (num === 0) {
-                alert(1);
+                //alert(1);
                 //window.location.href = "http://www.baidu.com";
             } else {
                 setTimeout(function () {
