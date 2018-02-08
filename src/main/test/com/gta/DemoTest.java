@@ -1,13 +1,11 @@
 package com.gta;
 
 import com.gta.util.EhCacheUtil;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.io.InputStream;
+import java.util.Random;
 
 /**
  * Desc:
@@ -15,8 +13,8 @@ import java.io.InputStream;
  * Date: 2018/2/5
  * Time: 14:58
  */
-//@RunWith(JUnit4.class)
-public class DemoTest extends BaseTest{
+@RunWith(JUnit4.class)
+public class DemoTest {
 
     /**
      * 身份证
@@ -45,10 +43,29 @@ public class DemoTest extends BaseTest{
 
     @Test
     public void test4() {
-        LOGGER.debug("This is a debug level log.");
+        /*LOGGER.debug("This is a debug level log.");
         LOGGER.info("This is a info level log.");
         LOGGER.fatal("This is a fatal level log.");
-        LOGGER.error("This is an error level log.");
+        LOGGER.error("This is an error level log.")*/;
+    }
+
+    @Test
+    public void test5(){
+        //test5(); // 递归调用, java.lang.StackOverflowError
+
+        /* java.lang.OutOfMemoryError: Java heap space
+        *  VM options: -Xms6m -Xmx6m -XX:+PrintGCDetails
+        * */
+        String str = "aaaaaaaaaaaa";
+        while (true) {
+            str += str + new Random().nextInt(8888888) + new Random().nextInt(999999999);
+        }
+
+    }
+
+    @Test
+    public void test6(){
+        System.out.println(111);
     }
 
 }

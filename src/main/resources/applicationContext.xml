@@ -34,6 +34,7 @@
         <constructor-arg index="1" value="BATCH" />
     </bean>
 
+    <!-- 配置扫描DAO接口， 动态实现DAO接口， 注入到spring容器中 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.gta.dao"/>
     </bean>
