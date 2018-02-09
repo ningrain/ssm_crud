@@ -19,7 +19,7 @@ import javax.annotation.PostConstruct;
 @Component
 public class SpringTask {
 
-    //@PostConstruct
+    @PostConstruct
     public void init(){
         getWeatherType();
     }

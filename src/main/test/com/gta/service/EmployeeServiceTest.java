@@ -1,8 +1,11 @@
 package com.gta.service;
 
 import com.gta.BaseTest;
+import com.gta.bean.Employee;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -17,12 +20,19 @@ public class EmployeeServiceTest extends BaseTest {
 
     @Test
     public void checkEmp() {
-        System.out.println(employeeService.checkEmp("bbbb"));
+        System.out.println(employeeService.checkEmp("7c2ca56"));
     }
 
     @Test
     public void getEmp(){
-        System.out.println(employeeService.getEmp(1006).toString());
+        System.out.println(employeeService.getEmp(107));
     }
 
+    @Test
+    public void getAllEmpls(){
+        List<Employee> emps = employeeService.getAllEmpls();
+        for (Employee emp : emps) {
+            System.out.println(emp.toString());
+        }
+    }
 }

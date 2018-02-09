@@ -3,12 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans.xsd
                 http://www.springframework.org/schema/context
                 http://www.springframework.org/schema/context/spring-context.xsd
                 http://www.springframework.org/schema/tx
-                http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+                http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:component-scan base-package="com.gta">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
@@ -46,6 +47,31 @@
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcache.xml"/>
     </bean>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--<bean id="testController" class="com.gta.controller.TestController"/>
+
+    <bean id="timeAspect" class="com.gta.aspect.TimeAspect"/>
+
+    <bean id="logAspect" class="com.gta.aspect.LogAspect"/>
+
+
+
+    <aop:config>
+        <aop:aspect ref="logAspect">
+            <aop:pointcut id="pointcut" expression="execution(* com.gta.controller.TestController.*(..))"/>
+            <aop:before method="doBefore" pointcut-ref="pointcut"/>
+            <aop:after method="doAfter" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+    <tx:advice id="interceptor">
+        <tx:attributes>
+            <tx:method name="get*" propagation="NEVER"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>-->
 
     <!--基于注解的事务管理 默认（transaction-manager="transactionManager"） 可以省略-->
     <tx:annotation-driven/>
