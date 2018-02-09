@@ -2,6 +2,8 @@ package com.gta.service;
 
 import com.gta.BaseTest;
 import com.gta.bean.Employee;
+import com.gta.util.SpringContextUtil;
+import com.gta.util.SpringUtilTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +17,8 @@ import static org.junit.Assert.*;
  */
 public class EmployeeServiceTest extends BaseTest {
 
+
+
     @Autowired
     private EmployeeService employeeService;
 
@@ -25,6 +29,7 @@ public class EmployeeServiceTest extends BaseTest {
 
     @Test
     public void getEmp(){
+        //EmployeeService employeeService1  = SpringContextUtil.getBean("employeeServiceImpl");
         System.out.println(employeeService.getEmp(107));
     }
 

@@ -22,6 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeMapper employeeMapper;
 
     public List<Employee> getAllEmpls() {
+        //int a = 1 / 0;
         EmployeeExample employeeExample = new EmployeeExample();
         employeeExample.setOrderByClause("emp_id");
         return employeeMapper.selectByExampleWithDept(employeeExample);

@@ -48,33 +48,30 @@
         <property name="configLocation" value="classpath:ehcache.xml"/>
     </bean>
 
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
-
-    <!--<bean id="testController" class="com.gta.controller.TestController"/>
-
-    <bean id="timeAspect" class="com.gta.aspect.TimeAspect"/>
-
     <bean id="logAspect" class="com.gta.aspect.LogAspect"/>
-
-
 
     <aop:config>
         <aop:aspect ref="logAspect">
-            <aop:pointcut id="pointcut" expression="execution(* com.gta.controller.TestController.*(..))"/>
+            <aop:pointcut id="pointcut" expression="execution(* com.gta.service..*.*(..))"/>
             <aop:before method="doBefore" pointcut-ref="pointcut"/>
             <aop:after method="doAfter" pointcut-ref="pointcut"/>
+            <aop:after-returning method="doAfterReturning" pointcut-ref="pointcut" returning="object"/>
+            <aop:after-throwing method="doAfterThrowing" pointcut-ref="pointcut" throwing="e"/>
+            <!--<aop:around method="doAround" pointcut-ref="pointcut"/>-->
         </aop:aspect>
     </aop:config>
 
-    <tx:advice id="interceptor">
+    <tx:advice id="interceptor"> <!--默认（transaction-manager="transactionManager"） 可以省略-->
         <tx:attributes>
             <tx:method name="get*" propagation="NEVER"/>
             <tx:method name="*"/>
         </tx:attributes>
-    </tx:advice>-->
+    </tx:advice>
+
+    <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
 
     <!--基于注解的事务管理 默认（transaction-manager="transactionManager"） 可以省略-->
-    <tx:annotation-driven/>
+    <!--<tx:annotation-driven/>-->
 
     <task:annotation-driven scheduler="qbScheduler"/>
     <task:scheduler id="qbScheduler" pool-size="10"/>
