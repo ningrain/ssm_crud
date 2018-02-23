@@ -41,6 +41,7 @@
         <fasterxml.jackson-databind>2.8.9</fasterxml.jackson-databind>
         <py4j.version>1.0.0</py4j.version>
         <aspectj.version>1.8.9</aspectj.version>
+        <joda-time.version>2.9.7</joda-time.version>
     </properties>
     <dependencies>
         <dependency>
@@ -212,6 +213,11 @@
             <groupId>com.mindflow</groupId>
             <artifactId>py4j</artifactId>
             <version>${py4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
         </dependency>
     </dependencies>
 

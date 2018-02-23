@@ -3,6 +3,7 @@ package com.gta.aspect;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -13,11 +14,14 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Desc: xml 配置方式实现 SpringAOP
+ * Desc: 注解方式实现 SpringAOP
  * User: jiangningning
  * Date: 2018/2/9
  * Time: 13:37
  */
+@Aspect
+@Component
+@Order(2)
 public class LogAspect {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(LogAspect.class);
@@ -26,9 +30,11 @@ public class LogAspect {
         System.out.println("######################################");
     }
 
+    @Pointcut("execution(* com.gta.service..*.*(..))")
     public void log(){
     }
 
+    @Before("log()")
     public void doBefore(JoinPoint joinPoint){
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
@@ -47,20 +53,22 @@ public class LogAspect {
 
     }
 
+    @After("log()")
     public void doAfter(){
         LOGGER.info("----------doAfter----------");
     }
 
+    @AfterReturning(value = "log()", returning = "object")
     public void doAfterReturning(Object object){
-        LOGGER.info("----------doAfterReturning----------");
         LOGGER.info("response={}", object);
     }
 
+    @AfterThrowing(value = "log()", throwing = "e")
     public void doAfterThrowing(Exception e){
-        LOGGER.info("----------doAfterThrowing----------");
         LOGGER.info("方法抛出异常了===========" + e.toString());
     }
 
+    //@Around("log()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
         LOGGER.info("----------doAround----------");
         return pjp.proceed();

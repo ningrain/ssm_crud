@@ -84,7 +84,7 @@
   </sql>
 
   <sql id="Base_Column_List_WithDept">
-    e.emp_id, e.emp_name, e.gender, e.email, e.d_id, d.dept_name
+    e.emp_id, e.emp_name, e.gender, e.email, e.d_id, d.dept_id, d.dept_name
   </sql>
 
   <select id="selectByExample" parameterType="com.gta.bean.EmployeeExample" resultMap="BaseResultMap">
@@ -129,7 +129,7 @@
     select
     <include refid="Base_Column_List_WithDept" />
     from tbl_emp e
-    LEFT JOIN tbl_dept d ON "e"."d_id" = "d"."dept_id"
+    LEFT JOIN tbl_dept d ON e.d_id = d.dept_id
     where emp_id = #{empId,jdbcType=INTEGER}
   </select>
 

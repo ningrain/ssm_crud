@@ -43,6 +43,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public Employee getEmpWithDept(Integer id) {
+        return employeeMapper.selectByPrimaryKeyWithDept(id);
+    }
+
     public int updateEmployee(Employee employee) {
         return employeeMapper.updateByPrimaryKeySelective(employee);
     }

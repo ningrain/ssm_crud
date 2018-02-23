@@ -2,12 +2,17 @@ package util;
 
 import com.gta.bean.Course;
 import com.gta.util.ReadExcelUtils;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Desc:
@@ -179,6 +184,71 @@ public class DemoTest {
         byte[] bytes = String.valueOf(8143).getBytes();
         for (int i = 0; i < bytes.length; i++) {
             System.out.println(Integer.toHexString(bytes[i]));
+        }
+    }
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    @Test
+    public void demoTest9(){
+        //DateTime dateTime = new DateTime();
+        //System.out.println(dateTime.toString("yyyy-MM-dd HH:mm:ss"));
+
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(2000);
+                    System.out.println(sdf.format(new Date("2010/10/10 15:23:23")));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        /*Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(sdf.format(new Date("2018/10/10 15:23:23")));
+            }
+        });*/
+        //thread1.start();
+        //thread2.start();
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService.execute(thread1);
+        //executorService.execute(thread2);
+        executorService.shutdown();
+    }
+
+
+    public static  String formatDate(Date date)throws Exception{
+        return sdf.format(date);
+    }
+
+    public static Date parse(String strDate) throws Exception{
+
+        return sdf.parse(strDate);
+    }
+
+    public static DateTime dateTime = new DateTime();
+    public static void main(String[] args) {
+        System.out.println(dateTime);
+        for(int i = 0; i < 3; i++){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(2000);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                    try {
+                        System.out.println(dateTime.toString("yyyy-MM-dd HH:mm:ss"));
+                        //System.out.println(DemoTest.parse("2013-05-24 06:02:20"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
         }
     }
 

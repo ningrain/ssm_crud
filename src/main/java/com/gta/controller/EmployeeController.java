@@ -67,7 +67,8 @@ public class EmployeeController {
     @ResponseBody
     @RequestMapping(value = "/emp/{id}", method = RequestMethod.GET)
     public Message getEmp(@PathVariable("id") Integer id){
-        Employee employee = employeeService.getEmp(id);
+        //Employee employee = employeeService.getEmp(id);
+        Employee employee = employeeService.getEmpWithDept(id);
         return Message.success().builder("emp", employee);
     }
 

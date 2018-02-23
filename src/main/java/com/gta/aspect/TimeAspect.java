@@ -17,9 +17,9 @@ import java.util.GregorianCalendar;
  * Date: 2018/2/1
  * Time: 9:20
  */
-/*@Aspect
+@Aspect
 @Component
-@Order(1)*/
+@Order(1)
 public class TimeAspect {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(TimeAspect.class);

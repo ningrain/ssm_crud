@@ -48,7 +48,7 @@
         <property name="configLocation" value="classpath:ehcache.xml"/>
     </bean>
 
-    <bean id="logAspect" class="com.gta.aspect.LogAspect"/>
+    <!--<bean id="logAspect" class="com.gta.aspect.LogAspect"/>
 
     <aop:config>
         <aop:aspect ref="logAspect">
@@ -57,21 +57,21 @@
             <aop:after method="doAfter" pointcut-ref="pointcut"/>
             <aop:after-returning method="doAfterReturning" pointcut-ref="pointcut" returning="object"/>
             <aop:after-throwing method="doAfterThrowing" pointcut-ref="pointcut" throwing="e"/>
-            <!--<aop:around method="doAround" pointcut-ref="pointcut"/>-->
+            &lt;!&ndash;<aop:around method="doAround" pointcut-ref="pointcut"/>&ndash;&gt;
         </aop:aspect>
     </aop:config>
 
-    <tx:advice id="interceptor"> <!--默认（transaction-manager="transactionManager"） 可以省略-->
+    <tx:advice id="interceptor"> &lt;!&ndash;默认（transaction-manager="transactionManager"） 可以省略&ndash;&gt;
         <tx:attributes>
             <tx:method name="get*" propagation="NEVER"/>
             <tx:method name="*"/>
         </tx:attributes>
-    </tx:advice>
+    </tx:advice>-->
 
-    <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!--基于注解的事务管理 默认（transaction-manager="transactionManager"） 可以省略-->
-    <!--<tx:annotation-driven/>-->
+    <tx:annotation-driven/>
 
     <task:annotation-driven scheduler="qbScheduler"/>
     <task:scheduler id="qbScheduler" pool-size="10"/>

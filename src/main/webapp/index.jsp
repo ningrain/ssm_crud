@@ -336,13 +336,13 @@
             type: "GET",
             data: "pageNumber=" + pageNum,
             success: function (result) {
-                var $weatherInfo = $("#weatherInfo");
+                /*var $weatherInfo = $("#weatherInfo");
                 $weatherInfo.empty();
                 $weatherInfo.append(result.map.weather.type)
                     .append(" ")
                     .append(result.map.weather.low.substring(3, 10))
                     .append("~")
-                    .append(result.map.weather.high.substring(3, 10));
+                    .append(result.map.weather.high.substring(3, 10));*/
                 $("#checkAllBox").attr("checked", false);
                 build_table(result);
                 build_page_info(result);

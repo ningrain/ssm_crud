@@ -17,6 +17,8 @@ public interface EmployeeService {
 
     Employee getEmp(Integer id);
 
+    Employee getEmpWithDept(Integer id);
+
     int updateEmployee(Employee employee);
 
     int delEmpByBatch(List<Integer> ids);
