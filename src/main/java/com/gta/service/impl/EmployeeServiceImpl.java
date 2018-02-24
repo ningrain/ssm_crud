@@ -1,5 +1,6 @@
 package com.gta.service.impl;
 
+import com.gta.annotation.DataSourceAnnotation;
 import com.gta.bean.Employee;
 import com.gta.bean.EmployeeExample;
 import com.gta.dao.EmployeeMapper;
@@ -43,7 +44,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeMapper.selectByPrimaryKey(id);
     }
 
-    @Override
+    //@Annotation1
+    @DataSourceAnnotation
     public Employee getEmpWithDept(Integer id) {
         return employeeMapper.selectByPrimaryKeyWithDept(id);
     }
