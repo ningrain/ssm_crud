@@ -2,8 +2,12 @@ package com.gta.realms;
 
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Desc:
@@ -48,8 +52,15 @@ public class MyRealm extends AuthorizingRealm{
     }
 
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        Object principal = principals.getPrimaryPrincipal();
+        Set<String> roles = new HashSet<>();
+        roles.add("user");
+        if ("admin".equals(principal)) {
+            roles.add("admin");
+        }
+        AuthorizationInfo info = new SimpleAuthorizationInfo(roles);
+        return info;
     }
 
 }

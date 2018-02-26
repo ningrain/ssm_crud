@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@include file="resources/globle.jsp" %>
+<%@include file="../../resources/globle.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,7 @@
 </head>
 <body>
     Login Page.
-    <form id="" action="${ctxPath}/login">
+    <form id="" action="${ctxPath}/login" method="post">
         <br><br>
         <label for="username">姓名：</label><input id="username" name="username" type="text">
         <br><br>

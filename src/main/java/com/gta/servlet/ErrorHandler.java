@@ -1,5 +1,8 @@
 package com.gta.servlet;
 
+import org.apache.shiro.authz.UnauthenticatedException;
+import org.apache.shiro.authz.UnauthorizedException;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,9 +27,11 @@ public class ErrorHandler extends HttpServlet {
 
         resp.setContentType("text/html");
         PrintWriter pw = resp.getWriter();
-        if (statusCode != null && statusCode == 404){
+        if (statusCode != null && statusCode == 404) {
             pw.write("<h1>访问出现异常,请检查您的路径</h1>");
-        }else {
+        } else if (throwable instanceof UnauthorizedException) {
+            resp.sendRedirect(req.getContextPath() + "/unauthorized");
+        } else {
             pw.write("<h1>服务器内部出错：" + throwable.getMessage() + "</h1>");
             throwable.printStackTrace();
         }

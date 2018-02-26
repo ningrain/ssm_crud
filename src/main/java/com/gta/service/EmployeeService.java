@@ -22,4 +22,6 @@ public interface EmployeeService {
     int updateEmployee(Employee employee);
 
     int delEmpByBatch(List<Integer> ids);
+
+    void testMethod();
 }

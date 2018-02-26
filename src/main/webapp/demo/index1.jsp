@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@include file="resources/globle.jsp" %>
+<%@include file="../resources/globle.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
