@@ -10,12 +10,15 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-xs-8">
+        <div class="col-xs-6">
             <h1>SSM_CRUD</h1>
         </div>
         <div class="col-xs-4">
             <span>合肥今天天气：</span>
             <span id="weatherInfo"></span>
+        </div>
+        <div class="col-xs-2">
+            <a href="${ctxPath}/logout">退出</a>
         </div>
     </div>
     <div class="row">
