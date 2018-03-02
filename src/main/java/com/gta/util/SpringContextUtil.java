@@ -5,6 +5,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Desc: 可以在任何代码任何地方任何时候取出ApplicaitonContext.
  * User: jiangningning
@@ -86,6 +90,15 @@ public class SpringContextUtil implements ApplicationContextAware {
      */
     public static Class getType(String name) {
         return context.getType(name);
+    }
+
+    /**
+     * 获取所有bean名称
+     *
+     */
+    public static List<String> getBeans() {
+        String[] beanArrary = context.getBeanDefinitionNames();
+        return Arrays.asList(beanArrary);
     }
 
     private static void checkApplicationContext() {

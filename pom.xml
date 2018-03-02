@@ -34,6 +34,7 @@
         <alibaba.fastjson.version>1.2.31</alibaba.fastjson.version>
         <commons-fileupload.version>1.3.2</commons-fileupload.version>
         <commons-io.version>2.6</commons-io.version>
+        <commons-pool2.version>2.4.2</commons-pool2.version>
         <apache.poi.version>3.16</apache.poi.version>
         <ehcache.version>2.10.4</ehcache.version>
         <servlet-api.version>2.5</servlet-api.version>
@@ -43,6 +44,7 @@
         <aspectj.version>1.8.9</aspectj.version>
         <joda-time.version>2.9.7</joda-time.version>
         <shiro-all.version>1.3.2</shiro-all.version>
+        <jedis.version>2.9.0</jedis.version>
     </properties>
     <dependencies>
         <dependency>
@@ -87,6 +89,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.8.1.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -224,6 +232,16 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-all</artifactId>
             <version>${shiro-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>${commons-pool2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
         </dependency>
     </dependencies>
 

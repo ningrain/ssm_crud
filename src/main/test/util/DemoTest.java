@@ -2,6 +2,7 @@ package util;
 
 import com.gta.bean.Course;
 import com.gta.util.ReadExcelUtils;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
@@ -251,5 +252,26 @@ public class DemoTest {
             }).start();
         }
     }
+
+    public static void alterableMathod(Animal ... animals ){
+        for (Animal animal : animals) {
+            System.out.println(animal.getLegNum());
+        }
+    }
+
+    @Test
+    public void demoTest10(){
+        Person p = new Person();
+        Animal dog = new Dog();
+        dog.setName("大黄");
+        dog.setLegNum(4);
+        Animal fish = new Fish();
+        fish.setLegNum(0);
+        p.feedPet(dog);
+        alterableMathod(dog, fish);
+        final int a;
+        a = 20;
+    }
+
 
 }
