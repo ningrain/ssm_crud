@@ -273,5 +273,108 @@ public class DemoTest {
         a = 20;
     }
 
+    @Test
+    public void test11(){
+        Comparator<Student> comparator = Comparator.comparing(Student::getName).thenComparingInt(Student::getAge);
+        TreeSet<Student> students = new TreeSet<>(comparator);
+        Student stu1 = new Student("AA", 21);
+        Student stu2 = new Student("BB", 24);
+        Student stu3 = new Student("CC", 23);
+        Student stu4 = new Student("CC", 22);
+        students.add(stu1);
+        students.add(stu2);
+        students.add(stu3);
+        students.add(stu4);
+        for (Student stu : students){
+            System.out.println(stu);
+        }
 
+    }
+
+
+    class Student {
+        private String name;
+        private Integer age;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Integer getAge() {
+            return age;
+        }
+
+        public void setAge(Integer age) {
+            this.age = age;
+        }
+
+        public Student(String name, Integer age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Student student = (Student) o;
+
+            if (name != null ? !name.equals(student.name) : student.name != null) return false;
+            return age != null ? age.equals(student.age) : student.age == null;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = name != null ? name.hashCode() : 0;
+            result = 31 * result + (age != null ? age.hashCode() : 0);
+            return result;
+        }
+
+        //@Override
+        public int compareTo(Object o) {
+            if (o instanceof Student) {
+                Student student = (Student) o;
+                int result = this.name.compareTo(student.getName());
+                if (result == 0){
+                    return this.age.compareTo(student.getAge());
+                } else {
+                    return result;
+                }
+            }
+            return 0;
+        }
+
+        @Override
+        public String toString() {
+            return "Student{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+    }
+
+    class Mythread extends Thread{
+        @Override
+        public void run() {
+            for (int i = 0; i < 50; i++) {
+                System.out.println(Thread.currentThread().getName() + ": " + i);
+            }
+        }
+    }
+
+    @Test
+    public void test12(){
+
+        Mythread mt = new Mythread();
+        mt.start();
+
+        for (int i = 0; i < 50; i++) {
+            System.out.println(Thread.currentThread().getName() + ": " + i);
+        }
+    }
 }
