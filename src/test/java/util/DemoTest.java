@@ -1,16 +1,13 @@
-package util;
+package java.util;
 
 import com.gta.bean.Course;
 import com.gta.util.ReadExcelUtils;
-import com.sun.org.apache.xpath.internal.SourceTree;
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -253,7 +250,7 @@ public class DemoTest {
         }
     }
 
-    public static void alterableMathod(Animal ... animals ){
+    public static void alterableMathod(Animal... animals ){
         for (Animal animal : animals) {
             System.out.println(animal.getLegNum());
         }

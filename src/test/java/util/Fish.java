@@ -1,4 +1,4 @@
-package util;
+package java.util;
 
 /**
  * Desc:
@@ -6,5 +6,5 @@ package util;
  * Date: 2018/3/2
  * Time: 9:54
  */
-public class Fish extends Animal{
+public class Fish extends Animal {
 }

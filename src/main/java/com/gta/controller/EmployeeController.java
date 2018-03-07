@@ -22,6 +22,7 @@ import java.util.List;
  * Time: 13:57
  */
 @Controller
+@SuppressWarnings("unchecked")
 public class EmployeeController {
 
     @Autowired

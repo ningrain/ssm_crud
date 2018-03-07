@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
  * Date: 2018/1/15
  * Time: 8:50
  */
+@SuppressWarnings("unchecked")
 public class Biology {
 
     private int age;

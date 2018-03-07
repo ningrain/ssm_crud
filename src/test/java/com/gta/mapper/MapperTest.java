@@ -1,6 +1,6 @@
-package com.gta.mapper;
+package java.com.gta.mapper;
 
-import com.gta.BaseTest;
+import java.com.gta.BaseTest;
 import com.gta.bean.Department;
 import com.gta.bean.Employee;
 import com.gta.dao.DepartmentMapper;

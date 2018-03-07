@@ -1,4 +1,4 @@
-package com.gta;
+package java.com.gta;
 
 import com.gta.util.EhCacheUtil;
 import org.junit.Test;

@@ -1,13 +1,9 @@
-package util;
+package java.util;
 
-import com.gta.BaseTest;
-import com.gta.util.RedisUtil;
 import com.gta.util.SpringContextUtil;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.data.redis.core.RedisTemplate;
 
-import java.util.Arrays;
+import java.com.gta.BaseTest;
 
 /**
  * Desc:

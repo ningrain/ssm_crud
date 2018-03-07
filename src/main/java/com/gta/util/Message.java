@@ -59,6 +59,7 @@ public class Message {
         return map;
     }
 
+    @SuppressWarnings("unchecked")
     public void setMap(Map map) {
         this.map = map;
     }

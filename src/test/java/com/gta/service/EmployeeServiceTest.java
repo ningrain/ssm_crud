@@ -1,15 +1,12 @@
-package com.gta.service;
+package java.com.gta.service;
 
-import com.gta.BaseTest;
+import java.com.gta.BaseTest;
 import com.gta.bean.Employee;
-import com.gta.util.SpringContextUtil;
-import com.gta.util.SpringUtilTest;
+import com.gta.service.EmployeeService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * EmployeeService接口测试类
