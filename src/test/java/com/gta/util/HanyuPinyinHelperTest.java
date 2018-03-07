@@ -1,4 +1,4 @@
-package java.com.gta.util;
+package com.gta.util;
 
 import com.mindflow.py4j.Converter;
 import com.mindflow.py4j.PinyinConverter;

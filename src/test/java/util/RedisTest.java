@@ -1,9 +1,8 @@
-package java.util;
+package util;
 
+import com.gta.BaseTest;
 import com.gta.util.SpringContextUtil;
 import org.junit.Test;
-
-import java.com.gta.BaseTest;
 
 /**
  * Desc:
@@ -11,7 +10,7 @@ import java.com.gta.BaseTest;
  * Date: 2018/3/1
  * Time: 15:47
  */
-public class RedisTest extends BaseTest{
+public class RedisTest extends BaseTest {
 
     @Test
     public void test1(){

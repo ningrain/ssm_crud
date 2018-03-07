@@ -1,4 +1,4 @@
-package java.util;
+package util;
 
 import com.gta.bean.Course;
 import com.gta.util.ReadExcelUtils;
@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;

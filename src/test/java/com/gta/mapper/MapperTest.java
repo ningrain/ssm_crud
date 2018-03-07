@@ -1,6 +1,6 @@
-package java.com.gta.mapper;
+package com.gta.mapper;
 
-import java.com.gta.BaseTest;
+import com.gta.BaseTest;
 import com.gta.bean.Department;
 import com.gta.bean.Employee;
 import com.gta.dao.DepartmentMapper;
@@ -19,7 +19,7 @@ import java.util.UUID;
  * Date: 2017/9/19
  * Time: 9:17
  */
-public class MapperTest extends BaseTest{
+public class MapperTest extends BaseTest {
 
     @Autowired
     private DepartmentMapper departmentMapper;

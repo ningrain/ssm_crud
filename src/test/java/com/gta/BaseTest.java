@@ -1,4 +1,4 @@
-package java.com.gta;
+package com.gta;
 
 import org.apache.log4j.Logger;
 import org.junit.runner.RunWith;

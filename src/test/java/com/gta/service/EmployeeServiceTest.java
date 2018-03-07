@@ -1,8 +1,7 @@
-package java.com.gta.service;
+package com.gta.service;
 
-import java.com.gta.BaseTest;
+import com.gta.BaseTest;
 import com.gta.bean.Employee;
-import com.gta.service.EmployeeService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,9 +1,7 @@
-package java.com.gta.enums;
+package com.gta.enums;
 
-import com.gta.enums.StatusCode;
+import com.gta.BaseTest;
 import org.junit.Test;
-
-import java.com.gta.BaseTest;
 
 /**
  * StatusCode
