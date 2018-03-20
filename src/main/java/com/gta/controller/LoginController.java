@@ -49,7 +49,7 @@ public class LoginController {
                 System.out.println("登录失败：" + e.getMessage());
             }
         }
-        return "list";
+        return "index";
     }
 
     @RequestMapping("/testShiroAnnotation")

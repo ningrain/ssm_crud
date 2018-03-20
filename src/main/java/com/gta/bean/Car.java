@@ -14,6 +14,7 @@ public class Car {
     private int maxSpeed;
 
     public Car() {
+        System.out.println("Car's constructor……");
     }
 
     public Car(String name, String address, double price) {
@@ -27,6 +28,19 @@ public class Car {
         this.address = address;
         this.price = price;
         this.maxSpeed = maxSpeed;
+    }
+
+    public void setName(String name) {
+        System.out.println("Car's set method……" + name);
+        this.name = name;
+    }
+
+    public void init(){
+        System.out.println("Car's init method……");
+    }
+
+    public void destroy(){
+        System.out.println("Car's destroy method……");
     }
 
     @Override

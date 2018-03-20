@@ -4,6 +4,9 @@ import com.gta.bean.Course;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +37,8 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping(value = "/ajax1", method = RequestMethod.POST)
+    @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED,
+                    readOnly = true, timeout = 10)
     public Course ajaxTest1(HttpServletRequest request, HttpServletResponse response){
         //支持所有域名请求
         response.addHeader("Access-Control-Allow-Origin", "*");

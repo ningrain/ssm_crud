@@ -1,10 +1,15 @@
 package com.gta;
 
 import com.gta.util.EhCacheUtil;
+import com.mysql.jdbc.Driver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Random;
 
 /**
@@ -64,8 +69,45 @@ public class DemoTest {
     }
 
     @Test
-    public void test6(){
-        System.out.println(111);
+    public void test6() {
+        /*Integer integer = null;
+        System.out.println(integer!=null & integer.intValue() !=1);*/
+
+        /*out:
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (i == 5)
+                    break out;
+                System.out.println("i: " + i + " j: " + j);
+            }
+        }*/
+
+        /*Calendar cal = Calendar.getInstance();
+        System.out.println(cal.getTime());
+        System.out.println(LocalDateTime.now());*/
+        Connection conn = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ssm_crud",
+                    "root", "root");
+            PreparedStatement ps = conn.prepareStatement("SELECT t.emp_name FROM tbl_emp t WHERE t.emp_id = ?");
+            ps.setInt(1, 57);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null){
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 }

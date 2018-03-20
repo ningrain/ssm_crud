@@ -1,8 +1,11 @@
 package com.gta.util;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -14,11 +17,21 @@ import java.util.concurrent.TimeUnit;
  * Date: 2018/3/1
  * Time: 15:26
  */
+@Component
+//bean 的生命周期: singleton(单例)、prototype(每次都创建新的bean)
+//                session、request(web程序环境中的生命周期)
+@Scope(scopeName = "singleton")
 public class RedisUtil {
 
     private static Logger logger = Logger.getLogger(RedisUtil.class);
 
+    /*静态属性无法直接使用 @Autowired 注入， 改用在set方法上添加 @Autowired 注解*/
     private static RedisTemplate<Serializable, Object> redisTemplate;
+
+    @Autowired
+    public void setRedisTemplate(RedisTemplate<Serializable, Object> redisTemplate) {
+        RedisUtil.redisTemplate = redisTemplate;
+    }
 
     /**
      * 写入或更新缓存
@@ -122,7 +135,4 @@ public class RedisUtil {
         return redisTemplate.hasKey(key);
     }
 
-    public void setRedisTemplate(RedisTemplate<Serializable, Object> redisTemplate) {
-        RedisUtil.redisTemplate = redisTemplate;
-    }
 }

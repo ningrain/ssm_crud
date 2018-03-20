@@ -71,23 +71,23 @@
 
     <!--<bean id="logAspect" class="com.gta.aspect.LogAspect"/>
 
+    <tx:advice id="interceptor"> &lt;!&ndash;默认（transaction-manager="transactionManager"） 可以省略&ndash;&gt;
+        <tx:attributes>
+            <tx:method name="get*" propagation="NEVER"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
     <aop:config>
+        <aop:pointcut id="pointcut" expression="execution(* com.gta.service..*.*(..))"/>
+        <aop:advisor advice-ref="interceptor" pointcut-ref="pointcut"/>
         <aop:aspect ref="logAspect">
-            <aop:pointcut id="pointcut" expression="execution(* com.gta.service..*.*(..))"/>
             <aop:before method="doBefore" pointcut-ref="pointcut"/>
             <aop:after method="doAfter" pointcut-ref="pointcut"/>
             <aop:after-returning method="doAfterReturning" pointcut-ref="pointcut" returning="object"/>
             <aop:after-throwing method="doAfterThrowing" pointcut-ref="pointcut" throwing="e"/>
             &lt;!&ndash;<aop:around method="doAround" pointcut-ref="pointcut"/>&ndash;&gt;
         </aop:aspect>
-    </aop:config>
-
-    <tx:advice id="interceptor"> &lt;!&ndash;默认（transaction-manager="transactionManager"） 可以省略&ndash;&gt;
-        <tx:attributes>
-            <tx:method name="get*" propagation="NEVER"/>
-            <tx:method name="*"/>
-        </tx:attributes>
-    </tx:advice>-->
+    </aop:config>-->
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
@@ -199,7 +199,7 @@
         <property name="timeout" value="${redis.timeout}"/>
     </bean>
 
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
         <property name="connectionFactory" ref="jedisConnectionFactory"/>
         <property name="keySerializer">
             <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
@@ -208,7 +208,15 @@
             <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
         </property>
     </bean>
-    <bean id="jedisUtil" class="com.gta.util.RedisUtil">
+
+    <!--
+        http://blog.csdn.net/afgasdg/article/details/22739073
+        改用注解方式， 但是类的静态属性无法直接使用如下方式注入：
+            @Autowired
+            private static RedisTemplate<Serializable, Object> redisTemplate;
+        改用在该属性的set方法上添加@Autowired注解
+    -->
+    <!--<bean id="redisUtil" class="com.gta.util.RedisUtil">
         <property name="redisTemplate" ref="redisTemplate"/>
-    </bean>
+    </bean>-->
 </beans>

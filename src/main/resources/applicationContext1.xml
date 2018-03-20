@@ -5,32 +5,41 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <bean id="person" class="com.gta.bean.Person">
+    <!--<bean id="person" class="com.gta.bean.Person">
         <property name="name" value="B"/>
         <property name="car" ref="car2"/>
-    </bean>
+    </bean>-->
 
-    <bean id="person2" class="com.gta.bean.Person" p:name="C" p:car-ref="car2">
-    </bean>
+    <!--<bean id="person2" class="com.gta.bean.Person" p:name="C" p:car-ref="car2">
+    </bean>-->
 
-    <bean id="car1" class="com.gta.bean.Car">
+    <!--<bean id="car1" class="com.gta.bean.Car" init-method="init" destroy-method="destroy">
         <constructor-arg name="name" value="Audi"/>
         <constructor-arg name="address" value="Beijing"/>
         <constructor-arg name="price" value="300000"/>
-    </bean>
+    </bean>-->
+    <!--<bean id="car1" class="com.gta.bean.Car" init-method="init" destroy-method="destroy">
+        <property name="name" value="Audi"/>
+    </bean>-->
 
-    <bean id="car2" class="com.gta.bean.Car">
+    <!--<bean id="car2" class="com.gta.bean.Car">
         <constructor-arg name="name" value="Audi"/>
         <constructor-arg name="address" value="Beijing"/>
         <constructor-arg name="price" value="300000"/>
         <constructor-arg name="maxSpeed">
             <value>240</value>
         </constructor-arg>
-    </bean>
+    </bean>-->
 
-    <util:list id="cars">
+    <!--<util:list id="cars">
         <ref bean="car1"/>
         <ref bean="car1"/>
-    </util:list>
+    </util:list>-->
+
+    <bean id="myBeanProcessor" class="com.gta.util.MyBeanProcessor"/>
+
+    <bean id="carFactory" class="com.gta.bean.CarFactory"/>
+    <bean id="car1" factory-bean="carFactory" factory-method="getInstance"/>
+    <bean id="car2" factory-bean="carFactory" factory-method="getInstance"/>
 
 </beans>

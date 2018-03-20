@@ -10,6 +10,7 @@ import java.util.LinkedHashMap;
  */
 public class FilterChainDefinitionMapBuilder {
 
+    /*实例工厂方法产生 bean：filterChainDefinitionMap ， 为ShiroFilterFactoryBean设置filterChainDefinitionMap属性*/
     public LinkedHashMap<String, String> buildFilterChainDefinitionMap(){
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
@@ -18,6 +19,7 @@ public class FilterChainDefinitionMapBuilder {
         map.put("/resources/**", "anon");
         map.put("/demo/**", "anon");
         map.put("/login", "anon");
+        map.put("/websocket", "anon");
         map.put("/user", "authc,roles[user]");
         map.put("/admin", "authc,roles[admin]");
         map.put("/logout", "logout");
